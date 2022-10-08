@@ -13,7 +13,6 @@ public class ArrayProblems {
 		// Find Missing Number in Array, where array contains Number from 1....n
 		int missingNumber = findMissingNumberInArray(array, 9);
 		System.out.println("missingNumber:" + missingNumber);
-
 		// Find Missing Numbers (multiple missing numbers) in Array, where array
 		// contains Number from 1....n
 		int multMissingArry[] = { 1, 2, 3, 4, 6, 7, 8, 9, 10, 12, 15 };
@@ -65,6 +64,9 @@ public class ArrayProblems {
 		int arr3[] = { 1, 4, 45, 6, 10, -8, 12 };
 		findPairForGivenSum(arr3, 16);// for this to work we have to sort the array first
 		findPairForGivenSumUsingHashing(arr3, 16);
+		
+		int givenArr[] = {15, 2, 4, 8, 9, 5, 10, 23};
+		subArraySum(givenArr, givenArr.length, 23);
 
 		// Convert an array into Zig Zag Array
 		int arr4[] = { 3, 4, 6, 2, 1, 8, 9 };
@@ -262,6 +264,33 @@ public class ArrayProblems {
 		}
 	}
 
+	private static int subArraySum(int arr[], int n, int sum) {
+		int currentSum = arr[0];
+		int start = 0;
+		// Pick a starting point
+		for (int i = 1; i <= n; i++) {
+		    // If currentSum exceeds the sum,
+		    // then remove the starting elements
+		    while (currentSum > sum && start < i - 1) {
+			currentSum = currentSum - arr[start];
+			start++;
+		    }
+		    // If currentSum becomes equal to sum,
+		    // then return true
+		    if (currentSum == sum) {
+			int p = i - 1;
+			System.out.println("Sum found between indexes " + start + " and " + p);
+			return 1;
+		    }
+		    // Add this element to curr_sum
+		    if (i < n) {
+			currentSum = currentSum + arr[i];
+		    }
+		    System.out.println("i value; " + i);
+		}
+		System.out.println("No subarray found");
+		return 0;
+    }
 	private static int maxContiguousSubArraySum(int[] arr, int length) {
 		int max = 0;
 		int maxEndsHere = 0;
